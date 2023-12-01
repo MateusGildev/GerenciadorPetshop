@@ -12,6 +12,13 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
 - RESTful API
 - Postman
 
+## Funcionalidades
+
+- Listagem de todos os clientes
+- Listagem por id de cliente
+- Listagem por tipo de animal (Cachorro, Gato, etc)
+- Criar um novo cliente
+
 ## Estrutura do Projeto
 
 O projeto está organizado em camadas:
