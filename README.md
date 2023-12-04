@@ -11,13 +11,36 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
 - H2 Database
 - RESTful API
 - Postman
+- Ajax
 
 ## Funcionalidades
 
-- Listagem de todos os clientes
-- Listagem por id de cliente
-- Listagem por tipo de animal (Cachorro, Gato, etc)
-- Criar um novo cliente
+### Requisições via Postman
+
+- **Listar todos os clientes:**
+  - Endpoint: `GET /client/clinets` findAll()
+  - Descrição: Retorna todos os clientes cadastrados.
+  
+- **Buscar cliente por ID:**
+  - Endpoint: `GET /client/id/{id}`
+  - Descrição: Retorna os detalhes de um cliente com base no ID fornecido.
+  
+- **Buscar clientes por tipo de animal:**
+  - Endpoint: `GET /client/byTipoAnimal/{tipoAnimal}`
+  - Descrição: Retorna os clientes que possuem animais do tipo especificado.
+  
+- **Criar um novo cliente:**
+  - Endpoint: `POST /client/user`
+  - Descrição: Cria um novo cliente com base nos dados fornecidos.
+  - Utilização: Enviar uma requisição POST no Postman com os dados do cliente no corpo da requisição.
+
+### Formulário de Cadastro de Cliente
+
+Além das requisições via Postman, o sistema oferece um formulário web para cadastrar novos clientes:
+
+- **Cadastro de Cliente:**
+  - Página HTML: `index.html` (por enquanto)
+  - Descrição: Um formulário web que permite inserir os dados de um novo cliente e submetê-los para o backend.
 
 ## Estrutura do Projeto
 
@@ -28,19 +51,6 @@ O projeto está organizado em camadas:
 - **Repository**: Interação com o banco de dados através do Spring Data JPA.
 - **Model**: Entidades e classes de domínio do sistema.
 
-
-## Setup e Execução
-
-Para executar o projeto localmente:
-
-1. Clone este repositório.
-2. Certifique-se de ter o Java e o Maven instalados.
-3. Configure as dependências e o banco de dados conforme necessário.
-4. Execute a aplicação utilizando o Maven ou sua IDE.
-
-## Contribuição
-
-Contribuições são bem-vindas! Se encontrar problemas ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 Projeto ainda em andamento para fins de estudo e prática!
 
 
