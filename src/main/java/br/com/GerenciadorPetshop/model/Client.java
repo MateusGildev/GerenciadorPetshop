@@ -19,17 +19,17 @@ public class Client {
     @Column(columnDefinition = "TEXT")
     private String nome;
 
-    @Column(columnDefinition = "TEXT")
+
     private String nomeAnimal;
 
-    //@Column(columnDefinition = "TEXT")
+
     private String tipoAnimal;
 
-    private long cpf;
+    private String cpf;
 
     @Column(columnDefinition = "TEXT")
     private String endereco;
-    private Long telefone;
+    private String telefone;
 
 
     @Override

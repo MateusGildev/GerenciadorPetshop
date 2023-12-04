@@ -17,5 +17,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
         Client save(Client client);
 
+        List<Client> findByNome(String nome);
+
         List<Client> findByTipoAnimal(String tipoAnimal);
 }

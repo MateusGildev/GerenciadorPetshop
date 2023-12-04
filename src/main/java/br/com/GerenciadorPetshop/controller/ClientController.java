@@ -5,6 +5,7 @@ import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ public class ClientController {
 
     private final ClientRepository clientRepository;
     private final ClientService clientService;
+
 
     @Autowired
     public ClientController(ClientService clientService, ClientRepository clientRepository) {
@@ -42,8 +44,16 @@ public class ClientController {
     }
 
     @PostMapping(value = "/user")
-    public ResponseEntity<Client> createNewClient(@RequestBody Client client){
+    public ResponseEntity<Client> createNewClient(Client client){
+    System.out.println("Dados recebidos do formulario: "+client.toString());
+        System.out.println(client.getNomeAnimal());
+
         Client newClient = clientService.createClient(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newClient);
+        return ResponseEntity.ok("Dados recebidos com sucesso!").status(HttpStatus.CREATED).body(newClient);
+    }
+
+    @GetMapping(value = "/findByNome/{nome}")
+    public List<Client> findByNome(@PathVariable String nome){
+        return clientRepository.findByNome(nome);
     }
 }

@@ -38,6 +38,24 @@ public class ClientService { //O service da entidade aplica as regras de negocio
     public Client createClient(Client client){
         return clientRepository.save(client);
     }
+    @Transactional(readOnly = true)
+    public List<Client> findByNome(String nome){
+        List<Client> resultado = clientRepository.findByNome(nome);
+        return resultado;
+    }
+
+    public Long StringToLongCpf(String cpfString) {
+        // Remover caracteres não numéricos e converter para Long
+        String cpfNumerico = cpfString.replaceAll("[^\\d]", "");
+        return Long.parseLong(cpfNumerico);
+    }
+
+    public Long StringToLongTelefone(String telefoneString) {
+        // Remover caracteres não numéricos e converter para Long
+        String telefoneNumerico = telefoneString.replaceAll("[^\\d]", "");
+        return Long.parseLong(telefoneNumerico);
+    }
+
 }
 
 
