@@ -46,5 +46,16 @@ public class Client {
         return Objects.hash(id);
     }
 
-
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", nomeAnimal='" + nomeAnimal + '\'' +
+                ", tipoAnimal='" + tipoAnimal + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
+    }
 }

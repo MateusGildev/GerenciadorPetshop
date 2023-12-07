@@ -17,6 +17,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
         Client save(Client client);
 
+        void deleteById(Long id);
+        void deleteAll();
+
         List<Client> findByNome(String nome);
 
         List<Client> findByTipoAnimal(String tipoAnimal);

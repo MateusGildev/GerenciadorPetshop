@@ -5,7 +5,6 @@ import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +24,24 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
+        Client updateClient = clientService.findById(id);
+
+        if (updateClient != null) {
+            updateClient.setNome(client.getNome());
+            updateClient.setCpf(client.getCpf());
+            updateClient.setEndereco(client.getEndereco());
+            updateClient.setTelefone(client.getTelefone());
+            updateClient.setNomeAnimal(client.getNomeAnimal());
+            updateClient.setTipoAnimal(client.getTipoAnimal());
+
+            Client updatedClient = clientService.updateClient(updateClient);
+            return ResponseEntity.ok(updatedClient);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping(value = "/id/{id}")
     public Client findById(@PathVariable Long id) {
@@ -38,22 +55,38 @@ public class ClientController {
         return resultado;
     }
 
-        @GetMapping(value = "/byTipoAnimal/{tipoAnimal}")
+    @GetMapping(value = "/byTipoAnimal/{tipoAnimal}")
     public List<Client> findByTipoAnimal(@PathVariable String tipoAnimal) {
         return clientRepository.findByTipoAnimal(tipoAnimal);
     }
 
     @PostMapping(value = "/user")
-    public ResponseEntity<Client> createNewClient(Client client){
-    System.out.println("Dados recebidos do formulario: "+client.toString());
-        System.out.println(client.getNomeAnimal());
+    public ResponseEntity<Client> createNewClient(@RequestBody Client client) {
+        System.out.println("Dados recebidos do formulario: " + client.toString());
 
         Client newClient = clientService.createClient(client);
         return ResponseEntity.ok("Dados recebidos com sucesso!").status(HttpStatus.CREATED).body(newClient);
     }
 
-    @GetMapping(value = "/findByNome/{nome}")
-    public List<Client> findByNome(@PathVariable String nome){
-        return clientRepository.findByNome(nome);
+    @DeleteMapping(value = "/idDelete/{id}")
+    public String deleteClient(@PathVariable Long id) {
+        Client client = clientService.findById(id);
+
+        if (client != null) {
+            String clientName = client.getNome();
+
+            clientService.deleteById(id);
+            return ("Cliente: " + clientName + " excluido com sucesso!!!");
+        } else {
+            return "Cliente não encontrado...";
+        }
     }
+
+    @DeleteMapping(value = "/deleteAll")
+    public String deleteClient() {
+        clientService.deleteAll();
+        return "Todos os clientes foram excluidos com sucesso!!!";
+    }
+
+
 }

@@ -18,7 +18,7 @@ $(document).ready(function(){
             contentType: "application/json", // Definir o tipo de conteúdo como JSON
             success: function(response){
                 alert("Cadastro realizado com sucesso!");
-                // Faça algo após o sucesso, se necessário
+                window.location.href = "listagem_clientes.html";
             },
             error: function(){
                 alert("Erro ao cadastrar. Tente novamente.");
@@ -26,4 +26,3 @@ $(document).ready(function(){
         });
     });
 });
-

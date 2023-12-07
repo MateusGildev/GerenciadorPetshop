@@ -38,6 +38,20 @@ public class ClientService { //O service da entidade aplica as regras de negocio
     public Client createClient(Client client){
         return clientRepository.save(client);
     }
+
+    public void deleteById(Long id){
+        clientRepository.deleteById(id);
+
+    }
+
+    public Client updateClient(Client client){
+        return clientRepository.save(client);
+    }
+
+    public void deleteAll(){
+        clientRepository.deleteAll();
+
+    }
     @Transactional(readOnly = true)
     public List<Client> findByNome(String nome){
         List<Client> resultado = clientRepository.findByNome(nome);
@@ -55,6 +69,8 @@ public class ClientService { //O service da entidade aplica as regras de negocio
         String telefoneNumerico = telefoneString.replaceAll("[^\\d]", "");
         return Long.parseLong(telefoneNumerico);
     }
+
+
 
 }
 

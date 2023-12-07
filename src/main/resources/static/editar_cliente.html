@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Editar Cliente</h1>
+    <form id="editClientForm">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" required>
+        </div>
+        <div class="form-group">
+            <label for="nomeAnimal">Nome do Pet:</label>
+            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoAnimal">Tipo de Animal:</label>
+            <input type="text" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    // Extrair o ID do cliente da URL (por exemplo, "editar_cliente.html?id=123")
+    var urlParams = new URLSearchParams(window.location.search);
+    var clienteId = urlParams.get('id');
+
+    // Verificar se há um ID válido na URL
+    if(clienteId) {
+        // Requisição AJAX para obter os detalhes do cliente
+        $.ajax({
+            type: "GET",
+            url: "/client/id/" + clienteId, // Substitua pela rota correta que retorna os detalhes do cliente pelo ID
+            success: function(cliente){
+                // Preencher os campos do formulário com os detalhes do cliente
+                $("#nome").val(cliente.nome);
+                $("#cpf").val(cliente.cpf);
+                $("#endereco").val(cliente.endereco);
+                $("#telefone").val(cliente.telefone);
+                $("#nomeAnimal").val(cliente.nomeAnimal);
+                $("#tipoAnimal").val(cliente.tipoAnimal);
+            },
+            error: function(){
+                alert("Erro ao carregar dados do cliente.");
+            }
+        });
+
+        // Lidar com o envio do formulário de edição
+        $("#editClientForm").submit(function(event){
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Obter os valores dos campos do formulário
+            var formData = {
+                nome: $("#nome").val(),
+                cpf: $("#cpf").val(),
+                endereco: $("#endereco").val(),
+                telefone: $("#telefone").val(),
+                nomeAnimal: $("#nomeAnimal").val(),
+                tipoAnimal: $("#tipoAnimal").val()
+            };
+
+            // Enviar os dados como JSON para a rota de atualização do cliente
+            $.ajax({
+                type: "PUT",
+                url: "/client/edit/" + clienteId, // Substitua pela rota correta de atualização do cliente
+                data: JSON.stringify(formData), // Enviar os dados como JSON
+                contentType: "application/json", // Definir o tipo de conteúdo como JSON
+                success: function(response){
+                    alert("Cliente atualizado com sucesso!");
+                    // Redirecionar para a página de listagem após a atualização
+                    window.location.href = "listagem_clientes.html";
+                },
+                error: function(){
+                    alert("Erro ao atualizar o cliente.");
+                }
+            });
+        });
+    } else {
+        alert("ID do cliente não encontrado na URL.");
+        // Lógica adicional para lidar com a ausência do ID do cliente na URL
+    }
+});
+
+
+
+</script>
+</body>
+</html>
