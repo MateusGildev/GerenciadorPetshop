@@ -8,7 +8,7 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
 - Spring Framework
 - Spring Boot
 - Spring Data JPA
-- H2 Database
+- PostgreSQL
 - RESTful API
 - Postman
 - Ajax
@@ -33,14 +33,20 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
   - Endpoint: `POST /client/user`
   - Descrição: Cria um novo cliente com base nos dados fornecidos.
   - Utilização: Enviar uma requisição POST no Postman com os dados do cliente no corpo da requisição.
+  
+- **Atualizar um cliente existente:**
+  - Endpoint: `PUT /client/edit/{id}`
+  - Descrição: Atualiza os detalhes de um cliente existente com base no ID fornecido.
+  - Utilização: Enviar uma requisição PUT no Postman com os dados atualizados do cliente no corpo da requisição.
+  
+- **Excluir um cliente:**
+  - Endpoint: `DELETE /client/idDelete/{id}`
+  - Descrição: Exclui um cliente com base no ID fornecido.
+  - Utilização: Enviar uma requisição DELETE no Postman com o ID do cliente a ser excluído.
 
 ### Formulário de Cadastro de Cliente
 
-Além das requisições via Postman, o sistema oferece um formulário web para cadastrar novos clientes:
-
-- **Cadastro de Cliente:**
-  - Página HTML: `index.html` (por enquanto)
-  - Descrição: Um formulário web que permite inserir os dados de um novo cliente e submetê-los para o backend.
+Além das requisições via Postman, o sistema oferece um formulário web para cadastrar novos clientes, excluir e altera-los: 
 
 ## Estrutura do Projeto
 
@@ -52,5 +58,4 @@ O projeto está organizado em camadas:
 - **Model**: Entidades e classes de domínio do sistema.
 
 Projeto ainda em andamento para fins de estudo e prática!
-
 
