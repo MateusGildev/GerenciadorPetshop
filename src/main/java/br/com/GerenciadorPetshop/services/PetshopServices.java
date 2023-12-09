@@ -25,7 +25,7 @@ public class PetshopServices {
         return resultado;
     }
 
-    @Transactional(readOnly = true)
+
     public Service findByid(Long id) {
         Optional<Service> resultado = servicesRepository.findById(id);
 
