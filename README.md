@@ -1,6 +1,6 @@
 # Gerenciador de Pet Shop
 
-Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui funcionalidades para o gerenciamento de clientes, animais de estimação e serviços oferecidos pelo pet shop.
+Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui funcionalidades para o gerenciamento de clientes, produtos e serviços oferecidos pelo pet shop.
 
 ## Tecnologias utilizadas
 
