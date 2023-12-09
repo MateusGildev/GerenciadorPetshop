@@ -40,74 +40,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-   $(document).ready(function(){
-    // Função para carregar os clientes
-    function carregarClientes() {
-        $.ajax({
-            type: "GET",
-            url: "/client/clients",
-            success: function(response){
-                var tableBody = $("#clientesTableBody");
+<script src="js/listagem_clientes_script.js"></script>
 
-                $.each(response, function(index, client){
-                    var row = "<tr>" +
-                        "<td>" + client.id + "</td>" +
-                        "<td>" + client.nome + "</td>" +
-                        "<td>" + client.cpf + "</td>" +
-                        "<td>" + client.nomeAnimal + "</td>" +
-                        "<td>" + client.tipoAnimal + "</td>" +
-                        "<td>" + client.endereco + "</td>" +
-                        "<td>" + client.telefone + "</td>" +
-                        "<td>" +
-                        "<button class='btn btn-primary btn-edit' data-client-id='" + client.id + "'>Editar</button>" +
-                        "<button class='btn btn-secondary btn-delete' data-client-id='" + client.id + "'>Excluir</button>" +
-                        "</td>" +
-                        "</tr>";
-
-                    tableBody.append(row);
-                });
-
-                // Adicionar evento de clique para o botão "Editar"
-                $(document).on("click", ".btn-edit", function() {
-                    var clientId = $(this).data("client-id");
-                    // Redirecionar para a página de edição do cliente com o ID correspondente
-                    window.location.href = "editar_cliente.html?id=" + clientId;
-                    // Ou realizar outra ação desejada para a edição do cliente
-                });
-
-                // Adicionar evento de clique para o botão "Excluir"
-                $(document).on("click", ".btn-delete", function() {
-                    var clientId = $(this).data("client-id");
-
-                    $.ajax({
-                        type: "DELETE",
-                        url: "/client/idDelete/" + clientId,
-                        success: function(response){
-                            // Sucesso ao excluir o cliente
-                            // Atualizar a tabela ou realizar outras ações necessárias
-                            console.log("Cliente excluído com sucesso!");
-
-                            window.location.href = window.location.href;
-                        },
-                        error: function(){
-                            // Erro ao excluir o cliente
-                            console.error("Erro ao excluir o cliente.");
-                        }
-                    });
-                });
-            },
-            error: function(){
-                alert("Erro ao carregar clientes.");
-            }
-        });
-    }
-
-    // Chamar a função para carregar os clientes ao carregar a página
-    carregarClientes();
-});
-
-
-</script>
 </body>
 </html>
