@@ -5,21 +5,35 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Comment;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Entity
-@Setter @Getter @AllArgsConstructor @NoArgsConstructor
+@Component
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
     private Double price;
+    @Column(nullable = false)
     private Integer quantity;
+    @Column(nullable = false)
+    private Integer quantityMax;
+    @Column(nullable = false)
+    private Integer quantityMin;
 
     @Override
     public boolean equals(Object o) {
@@ -39,8 +53,11 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", quantityMax=" + quantityMax +
+                ", quantityMin=" + quantityMin +
                 '}';
     }
 }

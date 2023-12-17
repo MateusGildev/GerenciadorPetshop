@@ -13,11 +13,21 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private Product product;
+
+    public ProductService(ProductRepository productRepository, Product product) {
+        this.productRepository = productRepository;
+        this.product = product;
+    }
+
     @Transactional(readOnly = true)
     public List<Product> findAll() {
         List<Product> resultado = productRepository.findAll();
         return resultado;
     }
+
     @Transactional(readOnly = true)
     public Product findById(Long id) {
         Optional<Product> resultado = productRepository.findById(id);
@@ -46,5 +56,45 @@ public class ProductService {
         Product updateProduct = productRepository.save(product);
         System.out.println("Produto de id: " + product.getId() + " alterado com sucesso!");
         return updateProduct;
+    }
+
+    public boolean realizarCompra(Long id, Integer quantity) {
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            int newQuantity = product.getQuantity() + quantity;
+            product.setQuantity(newQuantity);
+            productRepository.save(product);
+            System.out.println("Compra realizada com sucesso!");
+            return true;
+        } else {
+            System.out.println("Produto de id: " + id + " não encontrado");
+            return false;
+        }
+    }
+
+    public boolean realizarVenda(Long id, Integer quantidade) {
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            if (product.getQuantity() >= quantidade) {
+                int newQuantity = product.getQuantity() - quantidade;
+                product.setQuantity(newQuantity);
+                productRepository.save(product);
+                System.out.println("VENDA REALIZADA COM SUCESSO!");
+                return true;
+
+            } else {
+                System.out.println("Quantidade insuficiente em estoque para realizar a venda.");
+                return false;
+            }
+        } else {
+            System.out.println("Produto de id: " + id + " não encontrado...");
+            return false;
+        }
     }
 }
