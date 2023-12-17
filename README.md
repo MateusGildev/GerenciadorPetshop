@@ -1,6 +1,6 @@
 # Gerenciador de Pet Shop
 
-Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui funcionalidades para o gerenciamento de clientes, animais de estimação e serviços oferecidos pelo pet shop.
+Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui funcionalidades para o gerenciamento de clientes, produtos e serviços oferecidos pelo pet shop.
 
 ## Tecnologias utilizadas
 
@@ -15,34 +15,44 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
 
 ## Funcionalidades
 
-### Requisições via Postman
+### Requisições Client via Postman
 
-- **Listar todos os clientes:**
-  - Endpoint: `GET /client/clinets` findAll()
-  - Descrição: Retorna todos os clientes cadastrados.
+- **Listar todos os clientes:**  Endpoint: `GET /client/clients` findAll()
   
-- **Buscar cliente por ID:**
-  - Endpoint: `GET /client/id/{id}`
-  - Descrição: Retorna os detalhes de um cliente com base no ID fornecido.
+- **Buscar cliente por ID:** - Endpoint: `GET /client/id/{id}`  
   
-- **Buscar clientes por tipo de animal:**
-  - Endpoint: `GET /client/byTipoAnimal/{tipoAnimal}`
-  - Descrição: Retorna os clientes que possuem animais do tipo especificado.
+- **Buscar clientes por tipo de animal:**  - Endpoint: `GET /client/byTipoAnimal/{tipoAnimal}`
+
+- **Criar um novo cliente:** - Endpoint: `POST /client/user`
   
-- **Criar um novo cliente:**
-  - Endpoint: `POST /client/user`
-  - Descrição: Cria um novo cliente com base nos dados fornecidos.
-  - Utilização: Enviar uma requisição POST no Postman com os dados do cliente no corpo da requisição.
+- **Atualizar um cliente existente:** - Endpoint: `PUT /client/edit/{id}`
   
-- **Atualizar um cliente existente:**
-  - Endpoint: `PUT /client/edit/{id}`
-  - Descrição: Atualiza os detalhes de um cliente existente com base no ID fornecido.
-  - Utilização: Enviar uma requisição PUT no Postman com os dados atualizados do cliente no corpo da requisição.
+- **Excluir um cliente:** Endpoint: `DELETE /client/idDelete/{id}`
+
+- ### Requisições de serviços via Postman
+
+- **Listar todos os serviços oferecidos pelo petshop:**  Endpoint: `GET /service/allServices` findAll()
   
-- **Excluir um cliente:**
-  - Endpoint: `DELETE /client/idDelete/{id}`
-  - Descrição: Exclui um cliente com base no ID fornecido.
-  - Utilização: Enviar uma requisição DELETE no Postman com o ID do cliente a ser excluído.
+- **Buscar serviço por ID:** - Endpoint: `GET /service/id/{id}`  
+
+- **Criar um novo serviço:** - Endpoint: `POST /service/createServ`
+  
+- **Atualizar um serviço existente:** - Endpoint: `PUT /service/edit/{id}`
+  
+- **Excluir um serviço:** Endpoint: `DELETE /service/delete/{id}`
+
+- ### Requisições de Produtos via Postman
+
+- **Listar todos os produtos oferecidos pelo petshop:**  Endpoint: `GET /product/allProducts` findAll()
+  
+- **Buscar produto por ID:** - Endpoint: `GET /product/id/{id}`  
+
+- **Criar um novo produto:** - Endpoint: `POST /product/newProduct`
+  
+- **Atualizar um produto existente:** - Endpoint: `PUT /product/edit/{id}`
+  
+- **Excluir um produto:** Endpoint: `DELETE /product/deleteProduct/{id}`
+
 
 ### Formulário de Cadastro de Cliente
 
