@@ -92,6 +92,7 @@ public class ProductController {
     public ResponseEntity<String> comprarProduto(@PathVariable Long id, @RequestBody ProductDto productDto) {
         Integer quantity = productDto.getQuantity();
 
+
         if (quantity != null) {
             boolean compraRealizada = productService.realizarCompra(id, quantity);
             if (compraRealizada) {

@@ -64,13 +64,20 @@ public class ProductService {
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
 
-            int newQuantity = product.getQuantity() + quantity;
-            product.setQuantity(newQuantity);
-            productRepository.save(product);
-            System.out.println("Compra realizada com sucesso!");
-            return true;
+            Integer quantityMax = product.getQuantityMax();
+
+            if (product.getQuantity() + quantity <= quantityMax) {
+                int newQuantity = product.getQuantity() + quantity;
+                product.setQuantity(newQuantity);
+                productRepository.save(product);
+                System.out.println("Compra realizada com sucesso!");
+                return true;
+            } else {
+                System.out.println("A quantidade de compra desejada ultrapassa a permitida, que é "+product.getQuantityMax());
+                return false;
+            }
         } else {
-            System.out.println("Produto de id: " + id + " não encontrado");
+            System.out.println("produto de id: "+id+" não encontrado");
             return false;
         }
     }
@@ -81,7 +88,9 @@ public class ProductService {
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
 
-            if (product.getQuantity() >= quantidade) {
+            Integer quantityMin = product.getQuantityMin();
+
+            if (product.getQuantity() - quantidade >= quantityMin) {
                 int newQuantity = product.getQuantity() - quantidade;
                 product.setQuantity(newQuantity);
                 productRepository.save(product);
@@ -90,6 +99,7 @@ public class ProductService {
 
             } else {
                 System.out.println("Quantidade insuficiente em estoque para realizar a venda.");
+                System.out.println("Compre mais produtos de: " + product.getName());
                 return false;
             }
         } else {
