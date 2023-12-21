@@ -1,4 +1,4 @@
-package br.com.GerenciadorPetshop.services;
+package br.com.GerenciadorPetshop.service;
 
 import br.com.GerenciadorPetshop.model.Product;
 import br.com.GerenciadorPetshop.repository.ProductRepository;

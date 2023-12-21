@@ -3,7 +3,7 @@ package br.com.GerenciadorPetshop.controller;
 import br.com.GerenciadorPetshop.model.Product;
 import br.com.GerenciadorPetshop.model.ProductDto;
 import br.com.GerenciadorPetshop.repository.ProductRepository;
-import br.com.GerenciadorPetshop.services.ProductService;
+import br.com.GerenciadorPetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

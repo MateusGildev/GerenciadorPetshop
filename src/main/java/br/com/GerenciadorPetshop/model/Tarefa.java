@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_service")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Service {
+public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +25,8 @@ public class Service {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return Objects.equals(id, service.id);
+        Tarefa tarefa = (Tarefa) o;
+        return Objects.equals(id, tarefa.id);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "Tarefa{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", price=" + price +

@@ -19,6 +19,9 @@ public class Client {
     @Column(columnDefinition = "TEXT")
     private String nome;
 
+    public Client(String nome) {
+        this.nome = nome;
+    }
 
     private String nomeAnimal;
 

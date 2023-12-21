@@ -31,15 +31,15 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
 
 - ### Requisições de serviços via Postman
 
-- **Listar todos os serviços oferecidos pelo petshop:**  Endpoint: `GET /service/allServices` findAll()
+- **Listar todos os serviços oferecidos pelo petshop:**  Endpoint: `GET /tarefa/allServices` findAll()
   
-- **Buscar serviço por ID:** - Endpoint: `GET /service/id/{id}`  
+- **Buscar serviço por ID:** - Endpoint: `GET /tarefa/id/{id}`  
 
-- **Criar um novo serviço:** - Endpoint: `POST /service/createServ`
+- **Criar um novo serviço:** - Endpoint: `POST /tarefa/createServ`
   
-- **Atualizar um serviço existente:** - Endpoint: `PUT /service/edit/{id}`
+- **Atualizar um serviço existente:** - Endpoint: `PUT /tarefa/edit/{id}`
   
-- **Excluir um serviço:** Endpoint: `DELETE /service/delete/{id}`
+- **Excluir um serviço:** Endpoint: `DELETE /tarefa/delete/{id}`
 
 - ### Requisições de Produtos via Postman
 

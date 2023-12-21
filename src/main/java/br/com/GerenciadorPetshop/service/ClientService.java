@@ -1,11 +1,10 @@
-package br.com.GerenciadorPetshop.services;
+package br.com.GerenciadorPetshop.service;
 
 import br.com.GerenciadorPetshop.model.Client;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;

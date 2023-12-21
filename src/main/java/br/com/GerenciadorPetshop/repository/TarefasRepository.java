@@ -1,19 +1,19 @@
 package br.com.GerenciadorPetshop.repository;
 
-import br.com.GerenciadorPetshop.model.Service;
+import br.com.GerenciadorPetshop.model.Tarefa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface ServicesRepository extends JpaRepository<Service, Long> {
+public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
 
-    List<Service> findAll();
+    List<Tarefa> findAll();
 
-    Service save(Service service);
+    Tarefa save(Tarefa tarefa);
 
-    Optional<Service> findById(Long id);
+    Optional<Tarefa> findById(Long id);
 
     void deleteById(Long id);
     
