@@ -1,11 +1,12 @@
 package br.com.GerenciadorPetshop.controller;
 
+import br.com.GerenciadorPetshop.model.Client;
 import br.com.GerenciadorPetshop.model.Order;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.service.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +70,32 @@ public class OrderController {
     @DeleteMapping(value = "/deleteOrderById/{orderId}")
     public void deleteById(@PathVariable Long orderId){
         orderService.deleteOrderById(orderId);
+    }
+
+    @PutMapping(value = "/updateOrderById/{id}")
+    public ResponseEntity<Order> updateOrderById(@RequestBody Order order, @PathVariable Long id){
+        Optional<Order> orderUpdate = orderService.findById(id);
+
+        if (orderUpdate.isPresent()){
+            Order existingOrder = orderUpdate.get();
+            Long existingClientId = order.getClient().getId();
+            Optional<Client> clientOptional = clientRepository.findById(existingClientId);
+
+            Client client = clientOptional.get();
+
+            existingOrder.setClient(client);
+            existingOrder.setOrderDate(order.getOrderDate());
+            existingOrder.setProductId(order.getProductId());
+            existingOrder.setTarefaId(order.getTarefaId());
+            existingOrder.setTotalPrice(order.getTotalPrice());
+            existingOrder.setStaffNotes(order.getStaffNotes());
+            existingOrder.setStatus(order.getStatus());
+
+            Order newOrderUpdated = orderService.updateOrder(existingOrder);
+
+            return ResponseEntity.ok(newOrderUpdated);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
 

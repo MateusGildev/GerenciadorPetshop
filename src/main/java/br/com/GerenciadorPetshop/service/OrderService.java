@@ -2,21 +2,16 @@ package br.com.GerenciadorPetshop.service;
 
 import br.com.GerenciadorPetshop.model.Client;
 import br.com.GerenciadorPetshop.model.Order;
-import br.com.GerenciadorPetshop.model.Product;
-import br.com.GerenciadorPetshop.model.Tarefa;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.repository.ProductRepository;
 import br.com.GerenciadorPetshop.repository.TarefasRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -83,6 +78,10 @@ public class OrderService {
         } else {
             throw new RuntimeException("Ordem de serviço de id: " + id + " não encontrado");
         }
+    }
+
+    public Order updateOrder(Order order){
+        return orderRepository.save(order);
     }
 }
 
