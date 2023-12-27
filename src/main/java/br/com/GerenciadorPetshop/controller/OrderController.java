@@ -1,9 +1,12 @@
 package br.com.GerenciadorPetshop.controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import br.com.GerenciadorPetshop.model.Client;
 =======
 <<<<<<< HEAD
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
+=======
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 import br.com.GerenciadorPetshop.model.Order;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
@@ -20,6 +23,9 @@ import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.service.OrderService;
 >>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
+<<<<<<< HEAD
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
+=======
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -93,6 +99,7 @@ public class OrderController {
         orderService.deleteOrderById(orderId);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     @PutMapping(value = "/updateOrderById/{id}")
     public ResponseEntity<Order> updateOrderById(@RequestBody Order order, @PathVariable Long id){
@@ -120,6 +127,8 @@ public class OrderController {
         return ResponseEntity.notFound().build();
     }
 =======
+=======
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 =======
     @GetMapping(value = "/findByCLient/{id}")
     @Transactional
@@ -159,6 +168,9 @@ public class OrderController {
 
 
 >>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
+<<<<<<< HEAD
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
+=======
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 }
 

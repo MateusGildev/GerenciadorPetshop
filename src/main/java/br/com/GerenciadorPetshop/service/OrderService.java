@@ -7,8 +7,11 @@ import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.repository.ProductRepository;
 import br.com.GerenciadorPetshop.repository.TarefasRepository;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 import org.aspectj.weaver.ast.Or;
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 >>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
+<<<<<<< HEAD
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
+=======
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 
 @Service
@@ -128,10 +134,13 @@ public class OrderService {
         Optional<Order> listOrders = orderRepository.findById(id);
         return listOrders.map(Collections::singletonList).orElse(Collections.emptyList());
 >>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
+<<<<<<< HEAD
     }
 
     public Order updateOrder(Order order){
         return orderRepository.save(order);
+=======
+>>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
     }
 }
 
