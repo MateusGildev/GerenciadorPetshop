@@ -15,8 +15,11 @@ import br.com.GerenciadorPetshop.repository.TarefasRepository;
 import org.aspectj.weaver.ast.Or;
 >>>>>>> 8000ec5c8b5904f6aa266370ca9e1ed72074390b
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +64,11 @@ public class OrderService {
 
     @Autowired
     private ClientService clientService;
+
+    public Order updateOrder(Order order){
+        return orderRepository.save(order);
+    }
+
 
 
     public Order createOrder(Order orderData, Long clientId) {
