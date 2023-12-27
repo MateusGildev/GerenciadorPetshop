@@ -1,15 +1,22 @@
 package br.com.GerenciadorPetshop.model;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
+=======
+>>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< HEAD
+=======
+import org.hibernate.annotations.Comment;
+>>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -27,6 +34,7 @@ public class Product {
     private Long id;
 
     @Column(name = "product_name", nullable = false, unique = true)
+<<<<<<< HEAD
     @NotBlank
     @NotEmpty
     private String name;
@@ -46,6 +54,17 @@ public class Product {
     @Column(nullable = false)
     private Integer quantityMax;
 
+=======
+    private String name;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
+    private Double price;
+    @Column(nullable = false)
+    private Integer quantity;
+    @Column(nullable = false)
+    private Integer quantityMax;
+>>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
     @Column(nullable = false)
     private Integer quantityMin;
 
