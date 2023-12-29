@@ -1,12 +1,8 @@
 package br.com.GerenciadorPetshop.model;
 
 import jakarta.persistence.*;
-<<<<<<< HEAD
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
-=======
->>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,17 +18,11 @@ public class Tarefa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-<<<<<<< HEAD
     @NotBlank
     @Column(columnDefinition = "TEXT")
     private String description;
 
     @PositiveOrZero
-=======
-    @Column(columnDefinition = "TEXT")
-    private String description;
-
->>>>>>> 2189bd40a2cd069c46c86aa689abdc4d16d05811
     private double price;
 
     @Override

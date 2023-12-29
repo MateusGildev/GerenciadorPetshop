@@ -5,7 +5,6 @@ import br.com.GerenciadorPetshop.model.Order;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.service.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
