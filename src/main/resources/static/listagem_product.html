@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Listagem de Produtos</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h1>Listagem de Produtos</h1>
+    <div>
+      <a href="index.html" class="btn btn-primary mr-2">Voltar ao Menu</a>
+      <a href="cadastro_product.html" class="btn btn-success">Cadastrar Novo Produto</a>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" id="searchInput" placeholder="Pesquisar...">
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Produto</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Quantidade Atual no estoque</th>
+      <th>Quantidade Máxima</th>
+      <th>Quantidade Mínima</th>
+      <th>Ação</th>
+    </tr>
+    </thead>
+    <tbody id="productsTableBody">
+    <!-- Aqui será inserido o conteúdo da tabela -->
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="./scripts/productScripts/listagem_product_scripts.js"></script>
+
+</body>
+</html>

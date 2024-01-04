@@ -26,7 +26,6 @@ public class Client {
     @Column(columnDefinition = "TEXT")
     @NotBlank
     @NotEmpty
-
     private String nome;
 
     public Client(String nome) {

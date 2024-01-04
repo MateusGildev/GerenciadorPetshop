@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -28,27 +30,23 @@ public class ProductController {
     }
 
     @GetMapping(value = "/allProducts")
-    @Transactional
     public List<Product> findAll() {
         return productService.findAll();
     }
 
     @GetMapping(value = "/id/{id}")
-    @Transactional
-    public Product findById(Long id) {
-        Product resultado = productService.findById(id);
-        return resultado;
+    public Product findById(@PathVariable Long id) {
+        return productService.findById(id);
     }
 
-    @PostMapping(value = "/newProduct")
-    @Transactional
+    @PostMapping(value = "/newProduct", consumes = "application/json")
     public ResponseEntity<Product> createNewProduct(@RequestBody Product product) {
         System.out.println("Dados recebidos: " + product.toString());
 
-        Product newProduct = productService.save(product);
+        Product newProduct = productService.createProduct(product);
+
         return ResponseEntity.ok("Dados recebidos com sucesso!").status(HttpStatus.CREATED).body(newProduct);
     }
-
     @DeleteMapping(value = "/deleteProduct/{id}")
     @Transactional
     public void deleteById(@PathVariable Long id) {

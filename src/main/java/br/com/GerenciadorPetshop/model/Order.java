@@ -30,13 +30,11 @@ public class Order {
     @Valid
     private Client client;
 
-    @Size(min = 0)
-    @ElementCollection
-    private List<Long> tarefaId;
+    @ManyToMany
+    private List<Tarefa> tarefas;
 
-    @Size(min = 0)
-    @ElementCollection
-    private List<Long> productId;
+    @ManyToMany
+    private List<Product> products;
 
     @PositiveOrZero
     private Double totalPrice;
@@ -46,25 +44,6 @@ public class Order {
     private LocalDate orderDate;
 
     private String staffNotes;
-
-
-    @ElementCollection
-    private List<Long> serviceIds;
-
-    @ElementCollection
-    private List<Long> productIds;
-
-    @ManyToMany
-    @JoinTable(name = "order_services",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id"))
-    private List<Tarefa> services;
-
-    @ManyToMany
-    @JoinTable(name = "order_products",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
 
 
     private String status;

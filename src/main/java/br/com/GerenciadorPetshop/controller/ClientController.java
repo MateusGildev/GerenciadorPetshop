@@ -45,8 +45,7 @@ public class ClientController {
 
     @GetMapping(value = "/id/{id}")
     public Client findById(@PathVariable Long id) {
-        Client resultado = clientService.findById(id);
-        return resultado;
+        return clientService.findById(id);
     }
 
     @GetMapping(value = "/clients")
@@ -55,15 +54,9 @@ public class ClientController {
         return resultado;
     }
 
-    @GetMapping(value = "/byTipoAnimal/{tipoAnimal}")
-    public List<Client> findByTipoAnimal(@PathVariable String tipoAnimal) {
-        return clientRepository.findByTipoAnimal(tipoAnimal);
-    }
 
     @PostMapping(value = "/user")
     public ResponseEntity<Client> createNewClient(@RequestBody Client client) {
-        System.out.println("Dados recebidos do formulario: " + client.toString());
-
         Client newClient = clientService.createClient(client);
         return ResponseEntity.ok("Dados recebidos com sucesso!").status(HttpStatus.CREATED).body(newClient);
     }
@@ -80,12 +73,6 @@ public class ClientController {
         } else {
             return "Cliente não encontrado...";
         }
-    }
-
-    @DeleteMapping(value = "/deleteAll")
-    public String deleteClient() {
-        clientService.deleteAll();
-        return "Todos os clientes foram excluidos com sucesso!!!";
     }
 
 

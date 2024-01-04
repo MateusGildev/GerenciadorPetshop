@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +13,8 @@ public class ClientService { //O service da entidade aplica as regras de negocio
 
     @Autowired
     private ClientRepository clientRepository;
+
+
 
     @Transactional(readOnly = true) //Só fará leitura dos dados do banco.
     public Client findById(Long id) {
@@ -28,17 +29,22 @@ public class ClientService { //O service da entidade aplica as regras de negocio
 
     }
 
-    @Transactional(readOnly = true)
-    public List<Client> findByTipoAnimal(String tipoAnimal) {
-        List<Client> resultado = clientRepository.findByTipoAnimal(tipoAnimal);
-        return resultado;
+
+    public Client createClient(Client client) {
+        System.out.println("Dados recebidos do formulario: " + client.toString());
+
+        Client newClient = new Client();
+        newClient.setNome(client.getNome());
+        newClient.setEndereco(client.getEndereco());
+        newClient.setCpf(client.getCpf());
+        newClient.setTelefone(client.getTelefone());
+        newClient.setNomeAnimal(client.getNomeAnimal());
+        newClient.setTipoAnimal(client.getTipoAnimal());
+
+        return clientRepository.save(newClient);
     }
 
-    public Client createClient(Client client){
-        return clientRepository.save(client);
-    }
-
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         clientRepository.deleteById(id);
 
     }
@@ -47,15 +53,6 @@ public class ClientService { //O service da entidade aplica as regras de negocio
         return clientRepository.save(client);
     }
 
-    public void deleteAll(){
-        clientRepository.deleteAll();
-
-    }
-    @Transactional(readOnly = true)
-    public List<Client> findByNome(String nome){
-        List<Client> resultado = clientRepository.findByNome(nome);
-        return resultado;
-    }
 
     public Long StringToLongCpf(String cpfString) {
         // Remover caracteres não numéricos e converter para Long
@@ -68,7 +65,6 @@ public class ClientService { //O service da entidade aplica as regras de negocio
         String telefoneNumerico = telefoneString.replaceAll("[^\\d]", "");
         return Long.parseLong(telefoneNumerico);
     }
-
 
 
 }

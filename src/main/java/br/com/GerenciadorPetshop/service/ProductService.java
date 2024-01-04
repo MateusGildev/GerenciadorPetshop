@@ -46,10 +46,8 @@ public class ProductService {
         System.out.println("Produto de id:" + id + " excluido com sucesso!");
     }
 
-    public Product save(Product product) {
-        Product resultado = productRepository.save(product);
-        System.out.println("Produto:" + product.getName() + " salvo com sucesso");
-        return resultado;
+    public Product createProduct(Product product){
+        return productRepository.save(product);
     }
 
     public Product updateProduct(Product product) {

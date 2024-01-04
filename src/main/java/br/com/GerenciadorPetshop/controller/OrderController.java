@@ -1,9 +1,10 @@
 package br.com.GerenciadorPetshop.controller;
 
-import br.com.GerenciadorPetshop.model.Client;
-import br.com.GerenciadorPetshop.model.Order;
+import br.com.GerenciadorPetshop.model.*;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
+import br.com.GerenciadorPetshop.repository.ProductRepository;
+import br.com.GerenciadorPetshop.repository.TarefasRepository;
 import br.com.GerenciadorPetshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ import java.util.Optional;
 public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private TarefasRepository tarefasRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private OrderService orderService;
@@ -46,7 +53,6 @@ public class OrderController {
     }
 
     @GetMapping(value = "/findOrderByClient/{clientId}")
-    @Transactional
     public ResponseEntity<List<Order>> findOrderByClientId(@PathVariable Long clientId) {
         try {
             List<Order> orderList = orderService.findOrderByClientId(clientId);
@@ -57,14 +63,40 @@ public class OrderController {
     }
 
     @PostMapping("/createOrder/{clientId}")
-    public ResponseEntity<Order> createOrder(@RequestBody(required = true) Order orderData, @PathVariable Long clientId) {
+    public ResponseEntity<Object> createOrder(@RequestBody(required = true) OrderRequestData orderData, @PathVariable Long clientId) {
         try {
-            Order createdOrder = orderService.createOrder(orderData, clientId);
-            return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Ou outro código de status adequado para tratamento de exceção
+            Optional<Client> clientOptional = clientRepository.findById(clientId);
+            if (clientOptional.isPresent()) {
+                Client client = clientOptional.get();
+
+                // Criando um novo pedido
+                Order order = new Order();
+                order.setClient(client);
+                order.setTotalPrice(orderData.getTotalPrice());
+                order.setOrderDate(orderData.getOrderDate());
+                order.setStaffNotes(orderData.getStaffNotes());
+                order.setStatus(orderData.getStatus());
+
+                // Adicionando as tarefas (serviços) ao pedido
+                List<Tarefa> tarefas = tarefasRepository.findAllById(orderData.getTarefaId());
+                order.setTarefas(tarefas);
+
+                // Adicionando os produtos ao pedido
+                List<Product> products = productRepository.findAllById(orderData.getProductId());
+                order.setProducts(products);
+
+                Order savedOrder = orderRepository.save(order);
+                return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente de ID: " + clientId + " não encontrado. Não é possível criar o pedido.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao criar pedido: " + e.getMessage());
         }
     }
+
+
+
 
     @DeleteMapping(value = "/deleteOrderById/{orderId}")
     public void deleteById(@PathVariable Long orderId){
@@ -72,29 +104,8 @@ public class OrderController {
     }
 
     @PutMapping(value = "/updateOrderById/{id}")
-    public ResponseEntity<Order> updateOrderById(@RequestBody Order order, @PathVariable Long id){
-        Optional<Order> orderUpdate = orderService.findById(id);
-
-        if (orderUpdate.isPresent()){
-            Order existingOrder = orderUpdate.get();
-            Long existingClientId = order.getClient().getId();
-            Optional<Client> clientOptional = clientRepository.findById(existingClientId);
-
-            Client client = clientOptional.get();
-
-            existingOrder.setClient(client);
-            existingOrder.setOrderDate(order.getOrderDate());
-            existingOrder.setProductId(order.getProductId());
-            existingOrder.setTarefaId(order.getTarefaId());
-            existingOrder.setTotalPrice(order.getTotalPrice());
-            existingOrder.setStaffNotes(order.getStaffNotes());
-            existingOrder.setStatus(order.getStatus());
-
-            Order newOrderUpdated = orderService.updateOrder(existingOrder);
-
-            return ResponseEntity.ok(newOrderUpdated);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<String> updateOrderById(@RequestBody Order order, @PathVariable Long id){
+        return orderService.updateOrder(id, order);
     }
 }
 

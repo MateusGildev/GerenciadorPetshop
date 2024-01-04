@@ -53,6 +53,8 @@ $(document).ready(function(){
         });
     }
     carregarClientes();
+
+
     // Função para filtrar os clientes
         $("#searchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
@@ -61,4 +63,3 @@ $(document).ready(function(){
             });
         });
     });
-
