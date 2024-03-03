@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cliente</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+        <h1>Cadastro de Cliente</h1>
+        <div>
+            <a href="index.html" class="btn btn-primary mr-2">Voltar ao Menu</a>
+            <a href="listagem_clientes.html" class="btn btn-success">Lista de Clientes</a>
+        </div>
+    </div>
+
+    <form id="cadastroForm" action="/client/user" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" required>
+        </div>
+        <div class="form-group">
+            <label for="nomeAnimal">Nome do Pet:</label>
+            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoAnimal">Tipo de Animal:</label>
+            <select class="form-control" id="tipoAnimal" name="tipoAnimal" type="text" required>
+                <option value="">Selecione o tipo de animal</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="\scripts\clientScripts/cadastro_client_script.js"></script>
+</body>
+</html>

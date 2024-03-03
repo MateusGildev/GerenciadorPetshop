@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Listagem de Clientes</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+        <h1>Listagem de Clientes</h1>
+        <div>
+            <a href="index.html" class="btn btn-primary mr-2">Voltar ao Menu</a>
+            <a href="cadastro_cliente.html" class="btn btn-success">Cadastrar Novo Cliente</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" id="searchInput" placeholder="Pesquisar...">
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Pet</th>
+            <th>Tipo Animal</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody id="clientesTableBody">
+        <!-- Aqui será inserido o conteúdo da tabela -->
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="\scripts\clientScripts/listagem_client_script.js"></script>
+
+</body>
+</html>
