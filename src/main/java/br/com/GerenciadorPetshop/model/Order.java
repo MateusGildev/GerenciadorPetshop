@@ -43,11 +43,6 @@ public class Order {
     private List<Long> productId;
 
     @ElementCollection
-    @ManyToMany
-    private List<Tarefa> tarefas;
-
-    @ManyToMany
-
     private List<Product> products;
 
     @PositiveOrZero
@@ -61,6 +56,6 @@ public class Order {
 
 
     private String status;
-    
+
 }
 
