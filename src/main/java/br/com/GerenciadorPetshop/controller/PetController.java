@@ -6,6 +6,10 @@ import br.com.GerenciadorPetshop.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
+=======
+import org.springframework.transaction.annotation.Transactional;
+>>>>>>> 88c703ff0f97c8578d5db62097b022d9a6ecafb3
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

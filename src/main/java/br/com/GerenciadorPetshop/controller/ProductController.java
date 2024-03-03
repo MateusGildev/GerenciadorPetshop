@@ -10,7 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+>>>>>>> 88c703ff0f97c8578d5db62097b022d9a6ecafb3
 
 @RestController
 @RequestMapping(value = "/product")

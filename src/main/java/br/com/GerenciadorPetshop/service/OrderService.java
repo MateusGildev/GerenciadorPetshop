@@ -46,6 +46,8 @@ public class OrderService {
             existingOrder.setClient(updatedOrder.getClient());
             existingOrder.setProductId(updatedOrder.getProductId());
             existingOrder.setTarefaId(updatedOrder.getTarefaId());
+            existingOrder.setProducts(updatedOrder.getProducts());
+            existingOrder.setTarefas(updatedOrder.getTarefas());
             existingOrder.setTotalPrice(updatedOrder.getTotalPrice());
             existingOrder.setOrderDate(updatedOrder.getOrderDate());
             existingOrder.setStaffNotes(updatedOrder.getStaffNotes());
@@ -112,8 +114,10 @@ public class OrderService {
         }
     }
 
+
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
+
 }
 

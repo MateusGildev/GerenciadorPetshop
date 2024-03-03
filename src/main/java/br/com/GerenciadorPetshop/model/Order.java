@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +43,11 @@ public class Order {
     private List<Long> productId;
 
     @ElementCollection
+    @ManyToMany
+    private List<Tarefa> tarefas;
+
+    @ManyToMany
+
     private List<Product> products;
 
     @PositiveOrZero
@@ -54,8 +61,6 @@ public class Order {
 
 
     private String status;
-
-
-
+    
 }
 
