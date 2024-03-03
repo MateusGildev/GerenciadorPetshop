@@ -53,6 +53,18 @@ Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui f
   
 - **Excluir um produto:** Endpoint: `DELETE /product/deleteProduct/{id}`
 
+- - ### Requisições da Ordem de Serviço via Postman
+
+- **Listar todas as Ordens de Serviço oferecidos pelo petshop:**  Endpoint: `GET /order/findAll` findAll()
+  
+- **Buscar Ordem de Serviço por ID:** - Endpoint: `GET /order/findOrderById/{id}`  
+
+- **Criar uma nova Ordem de Serviço:** - Endpoint: `POST /order/createOrder/{clientId}`
+  
+- **Atualizar uma Ordem de Serviço existente:** - Endpoint: `PUT /order/updateOrderById/{id}`
+  
+- **Excluir uma Ordem de Serviço:** Endpoint: `DELETE /order/deleteOrderById/{id}`
+
 
 ### Formulário de Cadastro de Cliente
 
