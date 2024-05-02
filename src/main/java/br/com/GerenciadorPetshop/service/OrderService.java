@@ -41,6 +41,8 @@ public class OrderService {
             Order existingOrder = orderOptional.get();
 
             existingOrder.setClient(updatedOrder.getClient());
+            existingOrder.setProductId(updatedOrder.getProductId());
+            existingOrder.setTarefaId(updatedOrder.getTarefaId());
             existingOrder.setProducts(updatedOrder.getProducts());
             existingOrder.setTarefas(updatedOrder.getTarefas());
             existingOrder.setTotalPrice(updatedOrder.getTotalPrice());
