@@ -14,7 +14,6 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     @Query("SELECT DISTINCT p.tipoAnimal FROM Pet p")
     List<String> findDistinctByTipoAnimal();
 
-    // @Query("SELECT DISTINCT p.tipoAnimal FROM Pet p")
 
     Pet save(Pet pet);
 }
