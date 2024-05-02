@@ -2,6 +2,7 @@ package br.com.GerenciadorPetshop.service;
 
 import br.com.GerenciadorPetshop.model.Client;
 import br.com.GerenciadorPetshop.model.Order;
+import br.com.GerenciadorPetshop.model.Product;
 import br.com.GerenciadorPetshop.model.Tarefa;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
@@ -30,12 +31,8 @@ public class OrderService {
     private ProductRepository productRepository;
 
     @Autowired
-    private TarefasRepository tarefaRepository;
-    @Autowired
-    private TarefasRepository servicesRepository;
+    private TarefasRepository tarefasRepository;
 
-    @Autowired
-    private ClientService clientService;
 
     public ResponseEntity<String> updateOrder(Long orderId, Order updatedOrder) {
         Optional<Order> orderOptional = orderRepository.findById(orderId);
@@ -47,7 +44,6 @@ public class OrderService {
             existingOrder.setProducts(updatedOrder.getProducts());
             existingOrder.setTarefas(updatedOrder.getTarefas());
             existingOrder.setTotalPrice(updatedOrder.getTotalPrice());
-            existingOrder.setOrderDate(updatedOrder.getOrderDate());
             existingOrder.setStaffNotes(updatedOrder.getStaffNotes());
             existingOrder.setStatus(updatedOrder.getStatus());
 
@@ -60,30 +56,49 @@ public class OrderService {
     }
 
 
-
-    public ResponseEntity<String> createOrder(Order orderData, Long clientId) {
+    public Order createOrder(Order orderData, Long clientId) {
         Optional<Client> clientOptional = clientRepository.findById(clientId);
 
         if (clientOptional.isPresent()) {
             Client client = clientOptional.get();
 
-            Optional<Tarefa> tarefaOptional = tarefaRepository.findById(orderData.getId());
-            if (tarefaOptional.isPresent()) {
-                Order order = new Order();
-                order.setClient(client);
-                order.setTotalPrice(orderData.getTotalPrice());
-                order.setOrderDate(orderData.getOrderDate());
-                order.setStaffNotes(orderData.getStaffNotes());
-                order.setStatus(orderData.getStatus());
+            // Buscar as tarefas pelo ID
+            List<Long> tarefaIds = orderData.getTarefasId();
+            List<Tarefa> tarefaList = tarefasRepository.findAllById(tarefaIds);
 
-                Order savedOrder = orderRepository.save(order);
-                return new ResponseEntity<>("Pedido criado com sucesso!", HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>("A tarefa com o ID:  não foi encontrada. Não é possível criar o pedido.", HttpStatus.NOT_FOUND);
-            }
+            // Buscar os produtos pelo ID
+            List<Long> productIds = orderData.getProductsId();
+            List<Product> productList = productRepository.findAllById(productIds);
+
+            Order order = new Order();
+            order.setClient(client);
+            order.setTarefasId(tarefaIds);
+            order.setProductsId(productIds);
+            order.setTarefas(tarefaList); // Definir as instâncias de Tarefa na ordem
+            order.setProducts(productList); // Definir as instâncias de Product na ordem
+            order.setTotalPrice(calculateProductsPrice(productList) + calculateTarefasPrice(tarefaList));
+            order.setStaffNotes(orderData.getStaffNotes());
+            order.setStatus(orderData.getStatus());
+            return orderRepository.save(order);
         } else {
-            return new ResponseEntity<>("Cliente de ID: " + clientId + " não encontrado. Não é possível criar o pedido.", HttpStatus.NOT_FOUND);
+            return null; // Indica que o cliente não foi encontrado
         }
+    }
+
+    private Double calculateTarefasPrice(List<Tarefa> tarefaList) {
+        double totalPrice = 0.0;
+        for (Tarefa tarefa : tarefaList) {
+            totalPrice += tarefa.getPrice();
+        }
+        return totalPrice;
+    }
+
+    private Double calculateProductsPrice(List<Product> productList) {
+        double totalPrice = 0.0;
+        for (Product product : productList) {
+            totalPrice += product.getPrice();
+        }
+        return totalPrice;
     }
 
 
@@ -110,6 +125,11 @@ public class OrderService {
         } else {
             throw new RuntimeException("Ordem de serviço de id: " + id + " não encontrado");
         }
+    }
+
+
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 
 }

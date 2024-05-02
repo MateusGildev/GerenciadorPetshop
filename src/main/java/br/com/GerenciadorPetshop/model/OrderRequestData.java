@@ -19,6 +19,7 @@ public class OrderRequestData {
     private List<Long> tarefaId;
     private List<Long> productId;
     private Double totalPrice;
+    private String paymentMethod;
     @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull
     private LocalDate orderDate;

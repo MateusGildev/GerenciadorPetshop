@@ -16,4 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     void deleteById(Long id);
 
     Product save(Product product);
+
+    Long findIdByName(String name);
 }

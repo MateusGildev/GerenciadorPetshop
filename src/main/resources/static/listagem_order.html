@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordens de serviços</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+        <h1>Listagem de Ordens</h1>
+        <div>
+            <a href="index.html" class="btn btn-primary mr-2">Voltar ao Menu</a>
+            <a href="cadastro_order.html" class="btn btn-success">Criar nova Ordem de Serviço</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="statusSelect">Filtrar por status:</label>
+        <select class="form-control" id="statusSelect">
+            <option value="todos">Todos</option>
+            <option value="andamento">Em andamento</option>
+            <option value="concluido">Concluídos</option>
+        </select>
+    </div>
+
+    <input type="text" class="form-control mb-3" id="searchInput" placeholder="Pesquisar...">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID da Ordem</th>
+            <th>Id do Cliente</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody id="orderTableBody">
+        <!-- Aqui será inserido o conteúdo da tabela -->
+        </tbody>
+    </table>
+
+    <!-- Modal para exibir detalhes da ordem -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailsModalLabel">Detalhes da Ordem</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="orderDetailsContent">
+                    <!-- Aqui serão exibidos os detalhes da ordem -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="\scripts\orderScripts/listagem_order_script.js"></script>
+</body>
+</html>
+

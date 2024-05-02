@@ -23,4 +23,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
         List<Client> findByNome(String nome);
 
         List<Client> findByTipoAnimal(String tipoAnimal);
+
+        Optional<Client> findIdByNome(String client);
 }

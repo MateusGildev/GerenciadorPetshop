@@ -17,11 +17,38 @@ $(document).ready(function(){
                 $("#telefone").val(cliente.telefone);
                 $("#nomeAnimal").val(cliente.nomeAnimal);
                 $("#tipoAnimal").val(cliente.tipoAnimal);
+
+
+                preencherDropdown()
             },
             error: function(){
                 alert("Erro ao carregar dados do cliente.");
             }
         });
+
+
+        function preencherDropdown() {
+            $.ajax({
+                type: 'GET',
+                url: '/animal/types', // Endpoint para obter os tipos de animais
+                success: function(tiposAnimais) {
+                    const dropdown = $('#tipoAnimal');
+
+                    // Limpa opções existentes, exceto a primeira (placeholder)
+                    dropdown.empty();
+                    dropdown.append($('<option></option>').val('').text('Selecione o tipo de animal'));
+
+                    // Preenche as opções do dropdown com os tipos de animais
+                    tiposAnimais.forEach(function(tipo) {
+                        dropdown.append($('<option></option>').val(tipo).text(tipo));
+                    });
+                },
+                error: function(error) {
+                    console.error('Erro ao obter os tipos de animais:', error);
+                }
+            });
+        }
+
 
         //envio do formulário de edição
         $("#editClientForm").submit(function(event){

@@ -16,5 +16,6 @@ public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
     Optional<Tarefa> findById(Long id);
 
     void deleteById(Long id);
-    
+
+    Long findIdByDescription(String tarefaDescription);
 }

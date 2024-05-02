@@ -39,7 +39,7 @@ public class TarefasController {
     }
 
     @GetMapping(value = "/id/{id}")
-    public Tarefa findByid(@PathVariable Long id){
+    public Tarefa findById(@PathVariable Long id){
         Tarefa resultado = petshopServices.findByid(id);
         return resultado;
     }

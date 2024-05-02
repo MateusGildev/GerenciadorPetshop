@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,18 +30,26 @@ public class Order {
     @Valid
     private Client client;
 
-    @ManyToMany
+    @ElementCollection
+    private List<Long> tarefasId;
+
+    // Lista de instâncias de Tarefa
+    @Transient
     private List<Tarefa> tarefas;
 
-    @ManyToMany
+    // Lista de instâncias de Product
+    @Transient
     private List<Product> products;
+
+    @ElementCollection
+    private List<Long> productsId;
 
     @PositiveOrZero
     private Double totalPrice;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull
-    private LocalDate orderDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate orderDate = LocalDate.now();
 
     private String staffNotes;
 
@@ -49,4 +57,6 @@ public class Order {
     private String status;
 
 }
+
+
 

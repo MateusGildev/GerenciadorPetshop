@@ -28,9 +28,6 @@ public class Client {
     @NotEmpty
     private String nome;
 
-    public Client(String nome) {
-        this.nome = nome;
-    }
 
     @NotBlank
     @NotEmpty
