@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-<<<<<<< HEAD
     // Função para buscar e preencher os dropdowns de Serviço e Produto
     function carregarDropdowns() {
         // Busca todos os serviços do servidor
@@ -13,7 +11,8 @@ $(document).ready(function(){
                 dropdown.append($('<option></option>').val('').text('Selecione um Serviço'));
 
                 services.forEach(function(service) {
-                    dropdown.append($('<option></option>').val(service.id).text(service.description));
+                    var optionText = service.description;
+                    dropdown.append($('<option></option>').val(service.id).text(optionText));
                 });
             },
             error: function(error) {
@@ -31,7 +30,8 @@ $(document).ready(function(){
                 dropdown.append($('<option></option>').val('').text('Selecione um Cliente'));
 
                 clients.forEach(function(client) {
-                    dropdown.append($('<option></option>').val(client.id).text(client.nome));
+                    var optionText = client.nome;
+                    dropdown.append($('<option></option>').val(client.id).text(optionText));
                 });
             },
             error: function(error) {
@@ -47,9 +47,10 @@ $(document).ready(function(){
                 var productDropdown = $("#productDropdown");
                 productDropdown.empty();
                 productDropdown.append($('<option></option>').val('').text('Selecione um Produto'));
-
+        
                 products.forEach(function(product) {
-                    productDropdown.append($('<option></option>').val(product.id).text(product.name));
+                    var optionText = product.name;
+                    productDropdown.append($('<option></option>').val(product.id).text(optionText));
                 });
             },
             error: function() {
@@ -65,115 +66,38 @@ $(document).ready(function(){
     $("#orderForm").submit(function(event){
         event.preventDefault(); // Impede o envio padrão do formulário
 
-        // Obtém os valores selecionados nos dropdowns e outros campos do formulário
         var clientId = $("#clientsDropdown").val();
-        var tarefaNames = $("#serviceDropdown").val(); // Obtém os valores dos serviços selecionados
-        var productNames = $("#productDropdown").val(); // Obtém os valores dos produtos selecionados
+        console.log("ID do cliente selecionado:", clientId);
+
+        var productId = $("#productDropdown").val();
+        console.log("ID do produto selecionado:", productId);
+
+        var serviceId = $("#serviceDropdown").val();
+        console.log("ID do servico selecionado:", serviceId);
+
+        var clientId = clientId;
+        var serviceId = serviceId;
+        var productId = productId;
         var staffNotes = $("#staffNotes").val();
         var paymentMethod = $("#paymentMethod").val();
         var status = $("#status").val();
 
-        // Cria o objeto de dados a ser enviado
-        var formData = {
-            clientId: clientId,
-            tarefaNames: tarefaNames, // Envie os valores dos serviços selecionados como lista
-            productNames: productNames, // Envie os valores dos produtos selecionados como lista
-            staffNotes: staffNotes,
-            paymentMethod: paymentMethod,
-            status: status
-        };
 
-        // Envia a requisição POST para o backend
-        $.ajax({
-            type: "POST",
-            url: "/order/createOrder/" + clientId,
-            data: JSON.stringify(formData), // Converte o objeto para JSON
-            contentType: "application/json", // Define o tipo de conteúdo como JSON
-            success: function(response){
-                alert("Pedido criado com sucesso!");
-                // Redireciona para a página de listagem de pedidos
-                window.location.href = "listagem_order.html";
-            },
-            error: function(){
-                alert("Erro ao criar o pedido. Tente novamente.");
-            }
-        });
-    });
-});
-=======
- // Função para buscar e preencher os dropdowns de Serviço e Produto
-        function carregarDropdowns() {
-            // Busca todos os serviços do servidor
-            $.ajax({
-                type: 'GET',
-                url: '/service/allServices',
-                success: function(services) {
-                    const dropdown = $("#serviceDropdown");
-                    dropdown.empty();
-                    dropdown.append($('<option></option>').val('').text('Selecione um Serviço'));
+        if (clientId && serviceId && productId) {
 
-                    services.forEach(function(service) {
-                        dropdown.append($('<option></option>').val(service.id).text(service.description));
-                    });
-                },
-                error: function(error) {
-                    console.error('Erro ao obter os tipos de serviços:', error);
-                }
-            });
-
-            // Busca todos os produtos do servidor
-            $.ajax({
-                type: "GET",
-                url: "/product/allProducts",
-                success: function(products) {
-                    var productDropdown = $("#productDropdown");
-                    productDropdown.empty();
-                    productDropdown.append($('<option></option>').val('').text('Selecione um Produto'));
-
-                    products.forEach(function(product) {
-                        productDropdown.append($('<option></option>').val(product.id).text(product.name));
-                    });
-                },
-                error: function() {
-                    console.error("Erro ao buscar produtos.");
-                }
-            });
-        }
-
-        // Chama a função para carregar os dropdowns ao carregar a página
-        carregarDropdowns();
-
-        // Lida com o envio do formulário
-        $("#orderForm").submit(function(event){
-            event.preventDefault();
-
-
-            var clientId = $("#clientId").val();
-            var totalPrice = $("#totalPrice").val();
-            var orderDate = $("#orderDate").val();
-            var staffNotes = $("#staffNotes").val();
-            var paymentMethod = $("#paymentMethod").val();
-            var status = $("#status").val();
-
-            var tarefaIds = parseInt($("#serviceDropdown").val());
-            var productIds = parseInt($("#productDropdown").val());
-
-            var orderData = {
+            var formData = {
                 clientId: clientId,
-                tarefaIds: tarefaIds,
-                productIds: productIds,
-                totalPrice: totalPrice,
-                orderDate: orderDate,
+                tarefasId: [serviceId], // Envie o ID do serviço selecionado como lista
+                productsId: [productId], // Envie o ID do produto selecionado como lista
                 staffNotes: staffNotes,
                 paymentMethod: paymentMethod,
                 status: status
             };
 
-            // Cria a ordem após buscar serviços e produtos
             $.ajax({
                 type: "POST",
                 url: "/order/createOrder/" + clientId,
-                data: JSON.stringify(orderData),
+                data: JSON.stringify(formData),
                 contentType: "application/json",
                 success: function(response){
                     alert("Pedido criado com sucesso!");
@@ -183,6 +107,9 @@ $(document).ready(function(){
                     alert("Erro ao criar o pedido. Tente novamente.");
                 }
             });
-        });
+        } else {
+            alert("Por favor, selecione um cliente, serviço e produto antes de enviar o pedido.");
+        }
     });
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
+});
+

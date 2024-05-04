@@ -25,6 +25,11 @@ public class Tarefa {
     @PositiveOrZero
     private double price;
 
+    public Tarefa(String id) {
+        this.id = Long.parseLong(id);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

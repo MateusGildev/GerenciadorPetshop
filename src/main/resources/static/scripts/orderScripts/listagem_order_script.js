@@ -24,10 +24,7 @@ $(document).ready(function() {
             var row = `
                 <tr>
                     <td>${order.id}</td>
-<<<<<<< HEAD
                     <td>${order.client.id}</td>
-=======
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
                     <td>${order.client.nome}</td>
                     <td>${order.status}</td>
                     <td>
@@ -80,40 +77,27 @@ $(document).ready(function() {
            <p><strong>CPF:</strong> ${response.client.cpf}</p>
            <p><strong>Produtos:</strong></p><ul>`;
 
-<<<<<<< HEAD
-       if (response.products && response.products.length > 0) {
-               response.products.forEach(function(product) {
-                   formattedInfo += `<li>${product.name} - ${product.description}</li>`;
-               });
-           } else {
-               formattedInfo += `<li>Nenhum produto encontrado</li>`;
-           }
-
-           formattedInfo += `</ul>
-               <p><strong>Serviços:</strong></p><ul>`;
-
-           if (response.tarefas && response.tarefas.length > 0) {
-               response.tarefas.forEach(function(tarefa) {
-                   formattedInfo += `<li>${tarefa.description}</li>`;
-               });
-           } else {
-               formattedInfo += `<li>Nenhuma tarefa encontrada</li>`;
-           }
-=======
-       response.products.forEach(function(product) {
-           formattedInfo += `<li>${product.name} - ${product.description}</li>`;
-       });
+       if (response.products) {
+           response.products.forEach(function(product) {
+               formattedInfo += `<li>${product.name} - ${product.description}</li>`;
+           });
+       } else {
+           formattedInfo += `<li>Nenhum produto encontrado</li>`;
+       }
 
        formattedInfo += `</ul>
            <p><strong>Serviços:</strong></p><ul>`;
 
-       response.tarefas.forEach(function(tarefa) {
-           formattedInfo += `<li>${tarefa.description}</li>`;
-       });
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
+       if (response.tarefas && response.tarefas.length > 0) {
+           response.tarefas.forEach(function(tarefa) {
+               formattedInfo += `<li>${tarefa.description}</li>`;
+           });
+       } else {
+           formattedInfo += `<li>Nenhuma tarefa encontrada</li>`;
+       }
 
        formattedInfo += `</ul>
-           <p><strong>Preço Total:</strong> ${response.totalPrice}</p>
+           <p><strong>Preço Total R$:</strong> ${response.totalPrice}</p>
            <p><strong>Forma de Pagamento:</strong> ${response.paymentMethod}</p>
            <p><strong>Data:</strong> ${response.orderDate}</p>
            <p><strong>Staff Notes:</strong> ${response.staffNotes}</p>
@@ -121,6 +105,7 @@ $(document).ready(function() {
 
        $("#order-info-" + orderId).html(formattedInfo);
    }
+
 
 
     $("#searchInput").on("keyup", function() {

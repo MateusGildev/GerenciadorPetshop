@@ -13,7 +13,6 @@
     <h1>Criar Ordem de Serviço</h1>
 
     <div class="d-flex justify-content-between mb-3">
-
         <div>
             <a href="index.html" class="btn btn-primary mr-2">Voltar ao Menu</a>
             <a href="listagem_order.html" class="btn btn-success">Lista de Ordens</a>
@@ -22,58 +21,31 @@
 
     <form id="orderForm">
         <div class="form-group">
-<<<<<<< HEAD
             <label for="clientsDropdown">Clientes:</label>
             <select class="form-control" id="clientsDropdown" name="clientsDropdown" required>
-
+                <option value="" data-id="">Selecione um Cliente</option>
             </select>
-=======
-            <label for="clientId">ID do Cliente:</label>
-            <input type="number" class="form-control" id="clientId" name="clientId">
         </div>
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
 
         <div class="form-group">
             <label for="serviceDropdown">Serviço:</label>
             <select class="form-control" id="serviceDropdown" name="serviceDropdown" required>
-<<<<<<< HEAD
-
+                <option value="" data-id="">Selecione um Serviço</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="productDropdown">Produto:</label>
             <select class="form-control" id="productDropdown" name="productDropdown" required>
-
-=======
-                <option value="">Selecione o Serviço</option>
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label for="productDropdown">Produto:</label>
-            <select class="form-control" id="productDropdown" name="productDropdown" required>
-                <option value="">Selecione o Produto</option>
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
+                <option value="" data-id="">Selecione um Produto</option>
             </select>
         </div>
 
         <div class="form-group">
-<<<<<<< HEAD
-=======
-            <label for="totalPrice">Preço Total:</label>
-            <input type="number" class="form-control" id="totalPrice" name="totalPrice">
-        </div>
-        <div class="form-group">
-            <label for="orderDate">Data: (dd/MM/yyyy)</label>
-            <input type="text" class="form-control" id="orderDate" name="orderDate">
-        </div>
-        <div class="form-group">
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
             <label for="staffNotes">Staff Notes:</label>
             <textarea class="form-control" id="staffNotes" name="staffNotes"></textarea>
         </div>
+
         <div class="form-group">
             <label for="paymentMethod">Forma de Pagamento:</label>
             <select class="form-control" id="paymentMethod" name="paymentMethod">
@@ -82,19 +54,16 @@
                 <option value="cancelado">Pix</option>
             </select>
         </div>
+
         <div class="form-group">
             <label for="status">Status:</label>
             <select class="form-control" id="status" name="status">
                 <option value="concluido">Concluído</option>
                 <option value="em_andamento">Em Andamento</option>
                 <option value="cancelado">Cancelado</option>
-                <!-- Adicione outras opções aqui -->
             </select>
         </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
         <button type="submit" class="btn btn-primary">Criar Ordem de Serviço</button>
     </form>
 </div>

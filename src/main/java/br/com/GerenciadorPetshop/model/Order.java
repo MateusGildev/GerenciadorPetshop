@@ -19,6 +19,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(name = "Order.productsAndTarefas", attributeNodes = {
+        @NamedAttributeNode("tarefas"),
+        @NamedAttributeNode("products")
+})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,17 +36,20 @@ public class Order {
     @ElementCollection
     private List<Long> tarefasId;
 
-    @Transient
-    private List<Tarefa> tarefas;
-
-    @Transient
-    private List<Product> products;
-
     @ElementCollection
     private List<Long> productsId;
 
+    @OneToMany
+    private List<Tarefa> tarefas;
+
+    @OneToMany
+    private List<Product> products;
+
+
     @PositiveOrZero
     private Double totalPrice;
+
+    private String paymentMethod;
 
     @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -53,6 +60,22 @@ public class Order {
 
     private String status;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", client=" + client +
+                ", tarefasId=" + tarefasId +
+                ", productsId=" + productsId +
+                ", tarefas=" + tarefas +
+                ", products=" + products +
+                ", totalPrice=" + totalPrice +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", orderDate=" + orderDate +
+                ", staffNotes='" + staffNotes + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
 
 

@@ -59,6 +59,7 @@ public class OrderController {
 
     @PostMapping(value = "/createOrder/{clientId}")
     public ResponseEntity<Order> createOrder(@RequestBody Order orderData, @PathVariable Long clientId) {
+        System.out.println("Dados recebidos: "+orderData.toString());
         Order newOrder = orderService.createOrder(orderData, clientId);
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
 

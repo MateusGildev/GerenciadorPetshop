@@ -48,6 +48,12 @@ public class Product {
     @Column(nullable = false)
     private Integer quantityMin;
 
+    public Product(String id){
+        this.id = Long.parseLong(id);
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

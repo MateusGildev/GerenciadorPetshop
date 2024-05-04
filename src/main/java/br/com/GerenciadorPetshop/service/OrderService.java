@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,23 +41,33 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order existingOrder = orderOptional.get();
 
+            List<Tarefa> tarefaList = tarefasRepository.findAllById(updatedOrder.getTarefasId());
+            List<Product> productList = productRepository.findAllById(updatedOrder.getProductsId());
+
+            if (!tarefaList.isEmpty()) {
+                existingOrder.setTarefas(tarefaList);
+            } else {
+                existingOrder.setTarefas(Collections.emptyList());
+            }
+
+            if (!productList.isEmpty()) {
+                existingOrder.setProducts(productList);
+            } else {
+                existingOrder.setProducts(Collections.emptyList());
+            }
+
             existingOrder.setClient(updatedOrder.getClient());
-            existingOrder.setProducts(updatedOrder.getProducts());
-            existingOrder.setTarefas(updatedOrder.getTarefas());
-            existingOrder.setProducts(updatedOrder.getProducts());
-            existingOrder.setTarefas(updatedOrder.getTarefas());
-            existingOrder.setTotalPrice(updatedOrder.getTotalPrice());
+            existingOrder.setTotalPrice(calculateProductsPrice(productList)+calculateTarefasPrice(tarefaList));
+            existingOrder.setPaymentMethod(updatedOrder.getPaymentMethod());
             existingOrder.setStaffNotes(updatedOrder.getStaffNotes());
             existingOrder.setStatus(updatedOrder.getStatus());
 
-            Order savedOrder = orderRepository.save(existingOrder);
+            orderRepository.save(existingOrder);
             return new ResponseEntity<>("Pedido atualizado com sucesso!", HttpStatus.OK);
-
         } else {
             return new ResponseEntity<>("Ordem com o ID " + orderId + " não encontrada. Não é possível atualizar.", HttpStatus.NOT_FOUND);
         }
     }
-
 
     public Order createOrder(Order orderData, Long clientId) {
         Optional<Client> clientOptional = clientRepository.findById(clientId);
@@ -76,6 +87,7 @@ public class OrderService {
             order.setClient(client);
             order.setTarefasId(tarefaIds);
             order.setProductsId(productIds);
+            order.setPaymentMethod(orderData.getPaymentMethod());
             order.setTarefas(tarefaList); // Definir as instâncias de Tarefa na ordem
             order.setProducts(productList); // Definir as instâncias de Product na ordem
             order.setTotalPrice(calculateProductsPrice(productList) + calculateTarefasPrice(tarefaList));

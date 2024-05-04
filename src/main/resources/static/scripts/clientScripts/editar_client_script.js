@@ -17,28 +17,15 @@ $(document).ready(function(){
                 $("#telefone").val(cliente.telefone);
                 $("#nomeAnimal").val(cliente.nomeAnimal);
                 $("#tipoAnimal").val(cliente.tipoAnimal);
-<<<<<<< HEAD
 
+preencherDropdown()
 
-                preencherDropdown()
-=======
-<<<<<<< HEAD
-
-                preencherDropdown()
-=======
->>>>>>> 88c703ff0f97c8578d5db62097b022d9a6ecafb3
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
             },
             error: function(){
                 alert("Erro ao carregar dados do cliente.");
             }
         });
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
         function preencherDropdown() {
             $.ajax({
                 type: 'GET',
@@ -61,12 +48,6 @@ $(document).ready(function(){
             });
         }
 
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> 88c703ff0f97c8578d5db62097b022d9a6ecafb3
->>>>>>> f01ba6ec46c93442c77bceab52f70689f7337b0f
         //envio do formulário de edição
         $("#editClientForm").submit(function(event){
             event.preventDefault(); // Impede o envio padrão do formulário
