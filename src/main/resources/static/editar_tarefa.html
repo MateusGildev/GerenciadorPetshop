@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Serviço</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Editar Serviço</h1>
+    <form id="editTarefaForm">
+        <div class="form-group">
+            <label for="description">Descrição do Serviço:</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Preço R$:</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./scripts/tarefasScripts/editar_tarefa_script.js"></script>
+</body>
+</html>
