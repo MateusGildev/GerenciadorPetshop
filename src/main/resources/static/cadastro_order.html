@@ -27,19 +27,27 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="serviceDropdown">Serviço:</label>
-            <select class="form-control" id="serviceDropdown" name="serviceDropdown" required>
-                <option value="" data-id="">Selecione um Serviço</option>
-            </select>
-        </div>
 
-        <div class="form-group">
-            <label for="productDropdown">Produto:</label>
-            <select class="form-control" id="productDropdown" name="productDropdown" required>
-                <option value="" data-id="">Selecione um Produto</option>
-            </select>
+        <div id="serviceFields">
+            <div class="form-group">
+                <label for="serviceDropdown">Serviço:</label>
+                <select class="form-control" id="serviceDropdown" name="serviceDropdown">
+                    <option value="" data-id="">Selecione um Serviço</option>
+                </select>
+            </div>
         </div>
+        <button type="button" id="addServiceBtn" class="btn btn-primary mb-2">+ Serviço</button>
+
+
+        <div id="productFields">
+            <div class="form-group">
+                <label for="productDropdown">Produto:</label>
+                <select class="form-control" id="productDropdown" name="productDropdown">
+                    <option value="" data-id="">Selecione um Produto</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" id="addProductBtn" class="btn btn-primary mb-2">+ Produto</button>
 
         <div class="form-group">
             <label for="staffNotes">Staff Notes:</label>
@@ -50,17 +58,17 @@
             <label for="paymentMethod">Forma de Pagamento:</label>
             <select class="form-control" id="paymentMethod" name="paymentMethod">
                 <option value="Boleto">Boleto Bancário</option>
-                <option value="em_andamento">Mastercard</option>
-                <option value="cancelado">Pix</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="Pix">Pix</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="status">Status:</label>
             <select class="form-control" id="status" name="status">
-                <option value="concluido">Concluído</option>
-                <option value="em_andamento">Em Andamento</option>
-                <option value="cancelado">Cancelado</option>
+                <option value="Concluido">Concluído</option>
+                <option value="Em andamento">Em Andamento</option>
+                <option value="Cancelado">Cancelado</option>
             </select>
         </div>
 

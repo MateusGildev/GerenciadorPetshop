@@ -11,8 +11,7 @@ $(document).ready(function(){
                 dropdown.append($('<option></option>').val('').text('Selecione um Serviço'));
 
                 services.forEach(function(service) {
-                    var optionText = service.description;
-                    dropdown.append($('<option></option>').val(service.id).text(optionText));
+                    dropdown.append($('<option></option>').val(service.id).text(service.description));
                 });
             },
             error: function(error) {
@@ -30,8 +29,7 @@ $(document).ready(function(){
                 dropdown.append($('<option></option>').val('').text('Selecione um Cliente'));
 
                 clients.forEach(function(client) {
-                    var optionText = client.nome;
-                    dropdown.append($('<option></option>').val(client.id).text(optionText));
+                    dropdown.append($('<option></option>').val(client.id).text(client.nome));
                 });
             },
             error: function(error) {
@@ -47,10 +45,9 @@ $(document).ready(function(){
                 var productDropdown = $("#productDropdown");
                 productDropdown.empty();
                 productDropdown.append($('<option></option>').val('').text('Selecione um Produto'));
-        
+
                 products.forEach(function(product) {
-                    var optionText = product.name;
-                    productDropdown.append($('<option></option>').val(product.id).text(optionText));
+                    productDropdown.append($('<option></option>').val(product.id).text(product.name));
                 });
             },
             error: function() {
@@ -67,28 +64,33 @@ $(document).ready(function(){
         event.preventDefault(); // Impede o envio padrão do formulário
 
         var clientId = $("#clientsDropdown").val();
-        console.log("ID do cliente selecionado:", clientId);
-
-        var productId = $("#productDropdown").val();
-        console.log("ID do produto selecionado:", productId);
-
-        var serviceId = $("#serviceDropdown").val();
-        console.log("ID do servico selecionado:", serviceId);
-
-        var clientId = clientId;
-        var serviceId = serviceId;
-        var productId = productId;
         var staffNotes = $("#staffNotes").val();
         var paymentMethod = $("#paymentMethod").val();
         var status = $("#status").val();
 
+        var serviceIds = [];
+                $("#serviceFields .form-group select").each(function() {
+                    var serviceId = $(this).val();
+                    if (serviceId) {
+                        serviceIds.push(serviceId);
+                    }
+                });
 
-        if (clientId && serviceId && productId) {
 
+        // Obtém os IDs de todos os produtos selecionados
+        var productsIds = [];
+        $("#productFields .form-group select").each(function() {
+            var productId = $(this).val();
+            if (productId) {
+                productsIds.push(productId);
+            }
+        });
+
+        if (clientId) { // Verifica se a lista de IDs de produtos não está vazia
             var formData = {
                 clientId: clientId,
-                tarefasId: [serviceId], // Envie o ID do serviço selecionado como lista
-                productsId: [productId], // Envie o ID do produto selecionado como lista
+                tarefasId: serviceIds,
+                productsId: productsIds, // Envia todos os IDs dos produtos selecionados
                 staffNotes: staffNotes,
                 paymentMethod: paymentMethod,
                 status: status
@@ -108,8 +110,22 @@ $(document).ready(function(){
                 }
             });
         } else {
-            alert("Por favor, selecione um cliente, serviço e produto antes de enviar o pedido.");
+            alert("Por favor, selecione um cliente, serviço e pelo menos um produto antes de enviar o pedido.");
         }
     });
-});
 
+    // Lida com a adição de produtos
+    $(document).on("click", "#addProductBtn", function() {
+            var clonedFields = $("#productFields").children().last().clone();
+            clonedFields.find("select").val("");
+            clonedFields.find("input").val("");
+            $("#productFields").append(clonedFields);
+    });
+
+    $(document).on("click", "#addServiceBtn", function() {
+                var clonedFields = $("#serviceFields").children().last().clone();
+                clonedFields.find("select").val("");
+                clonedFields.find("input").val("");
+                $("#serviceFields").append(clonedFields);
+        });
+});
