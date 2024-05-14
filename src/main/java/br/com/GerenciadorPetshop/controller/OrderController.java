@@ -1,12 +1,14 @@
 package br.com.GerenciadorPetshop.controller;
 
 import br.com.GerenciadorPetshop.model.Order;
+import br.com.GerenciadorPetshop.model.Product;
 import br.com.GerenciadorPetshop.repository.ClientRepository;
 import br.com.GerenciadorPetshop.repository.OrderRepository;
 import br.com.GerenciadorPetshop.repository.ProductRepository;
 import br.com.GerenciadorPetshop.repository.TarefasRepository;
 import br.com.GerenciadorPetshop.service.ClientService;
 import br.com.GerenciadorPetshop.service.OrderService;
+import br.com.GerenciadorPetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,11 @@ public class OrderController {
     private TarefasRepository tarefasRepository;
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ProductService productService;
 
     private ClientRepository clientRepository;
     private ClientService clientService;
@@ -61,6 +66,12 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@RequestBody Order orderData, @PathVariable Long clientId) {
         System.out.println("Dados recebidos: "+orderData.toString());
         Order newOrder = orderService.createOrder(orderData, clientId);
+        if (!newOrder.getProducts().isEmpty()){ //Se os produtos de tal ordem nao estiver vazio, execute.
+            for (Product product: newOrder.getProducts()){
+                Integer quantitySold = 1;
+                productService.realizarVenda(product.getId(), quantitySold);
+            }
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
 
     }
