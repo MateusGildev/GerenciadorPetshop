@@ -1,83 +1,52 @@
 # Gerenciador de Pet Shop
 
-Este é um projeto de um sistema para gerenciamento de um Pet Shop. Ele inclui funcionalidades para o gerenciamento de clientes, produtos e serviços oferecidos pelo pet shop.
+Sistema para gerenciamento de clientes, produtos e serviços de um Pet Shop. Oferece API RESTful para interações com o banco de dados e um formulário web.
 
-## Tecnologias utilizadas
+## Tecnologias
 
-- Java
-- Spring Framework
-- Spring Boot
-- Spring Data JPA
-- PostgreSQL
-- RESTful API
-- Postman
-- Ajax
+- **Java** | **Spring Boot** | **PostgreSQL** 
+- **Postman** | **Ajax** | **JUnit** | **Mockito**
 
 ## Funcionalidades
 
-### Requisições Client via Postman
+- **Clientes**: Cadastro, edição, exclusão e busca (por ID ou tipo de animal).
+- **Serviços**: Gerenciamento completo de serviços.
+- **Produtos**: Cadastro, edição, listagem e exclusão.
+- **Ordens de Serviço**: Gerenciamento de ordens associadas a clientes.
 
-- **Listar todos os clientes:**  Endpoint: `GET /client/clients` findAll()
-  
-- **Buscar cliente por ID:** - Endpoint: `GET /client/id/{id}`  
-  
-- **Buscar clientes por tipo de animal:**  - Endpoint: `GET /client/byTipoAnimal/{tipoAnimal}`
+## Exemplos de Endpoints
 
-- **Criar um novo cliente:** - Endpoint: `POST /client/user`
-  
-- **Atualizar um cliente existente:** - Endpoint: `PUT /client/edit/{id}`
-  
-- **Excluir um cliente:** Endpoint: `DELETE /client/idDelete/{id}`
+- **Clientes**:  
+  `GET /client/clients` – Lista todos os clientes  
+  `POST /client/user` – Cria um novo cliente
 
-- ### Requisições de serviços via Postman
+- **Serviços**:  
+  `GET /tarefa/allServices` – Lista todos os serviços  
+  `POST /tarefa/createServ` – Cria um novo serviço
 
-- **Listar todos os serviços oferecidos pelo petshop:**  Endpoint: `GET /tarefa/allServices` findAll()
-  
-- **Buscar serviço por ID:** - Endpoint: `GET /tarefa/id/{id}`  
+- **Produtos**:  
+  `GET /product/allProducts` – Lista todos os produtos  
+  `POST /product/newProduct` – Cria um novo produto
 
-- **Criar um novo serviço:** - Endpoint: `POST /tarefa/createServ`
-  
-- **Atualizar um serviço existente:** - Endpoint: `PUT /tarefa/edit/{id}`
-  
-- **Excluir um serviço:** Endpoint: `DELETE /tarefa/delete/{id}`
-
-- ### Requisições de Produtos via Postman
-
-- **Listar todos os produtos oferecidos pelo petshop:**  Endpoint: `GET /product/allProducts` findAll()
-  
-- **Buscar produto por ID:** - Endpoint: `GET /product/id/{id}`  
-
-- **Criar um novo produto:** - Endpoint: `POST /product/newProduct`
-  
-- **Atualizar um produto existente:** - Endpoint: `PUT /product/edit/{id}`
-  
-- **Excluir um produto:** Endpoint: `DELETE /product/deleteProduct/{id}`
-
-- - ### Requisições da Ordem de Serviço via Postman
-
-- **Listar todas as Ordens de Serviço oferecidos pelo petshop:**  Endpoint: `GET /order/findAll` findAll()
-  
-- **Buscar Ordem de Serviço por ID:** - Endpoint: `GET /order/findOrderById/{id}`  
-
-- **Criar uma nova Ordem de Serviço:** - Endpoint: `POST /order/createOrder/{clientId}`
-  
-- **Atualizar uma Ordem de Serviço existente:** - Endpoint: `PUT /order/updateOrderById/{id}`
-  
-- **Excluir uma Ordem de Serviço:** Endpoint: `DELETE /order/deleteOrderById/{id}`
-
-
-### Formulário de Cadastro de Cliente
-
-Além das requisições via Postman, o sistema oferece um formulário web para cadastrar novos clientes, excluir e altera-los: 
+- **Ordens de Serviço**:  
+  `GET /order/findAll` – Lista todas as ordens de serviço  
+  `POST /order/createOrder/{clientId}` – Cria uma nova ordem de serviço
 
 ## Estrutura do Projeto
 
-O projeto está organizado em camadas:
+O projeto segue o padrão **MVC**:
 
-- **Controller**: Responsável pelo tratamento das requisições HTTP com o Postman.
-- **Service**: Lógica de negócio e processamento das operações.
-- **Repository**: Interação com o banco de dados através do Spring Data JPA.
-- **Model**: Entidades e classes de domínio do sistema.
+## Como Rodar
 
-Projeto ainda em andamento para fins de estudo e prática!
+1. Clone este repositório:  
+   `git clone https://github.com/MateusGildev/GerenciadorPetshop.git`
+   
+2. Navegue até a pasta do projeto:  
+   `cd GerenciadorPetshop`
+
+3. Execute a aplicação:  
+   `./mvnw spring-boot:run`
+
+4. Acesse a API em [http://localhost:8080](http://localhost:8080)
+
 
