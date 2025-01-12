@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +31,18 @@ public class Pet {
                 "id=" + id +
                 ", tipoAnimal='" + tipoAnimal + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(id, pet.id) && Objects.equals(tipoAnimal, pet.tipoAnimal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tipoAnimal);
     }
 }

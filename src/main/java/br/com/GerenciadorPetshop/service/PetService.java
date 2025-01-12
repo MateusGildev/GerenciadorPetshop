@@ -16,6 +16,8 @@ public class PetService {
     @Autowired
     PetRepository petRepository;
 
+
+
     @Transactional
     public List<Pet> findAll(){
         return petRepository.findAll();
@@ -27,6 +29,9 @@ public class PetService {
     }
 
     public Pet createNewPet(Pet pet){
+        if (pet == null || pet.getTipoAnimal() == null || pet.getTipoAnimal().isBlank()) {
+            throw new IllegalArgumentException("Dados Inválidos");
+        }
         return petRepository.save(pet);
     }
 }
