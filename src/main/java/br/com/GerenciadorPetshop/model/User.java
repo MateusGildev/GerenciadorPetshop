@@ -1,8 +1,7 @@
 package br.com.GerenciadorPetshop.model;
 
 import br.com.GerenciadorPetshop.Enum.UserRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +21,9 @@ import java.util.List;
 @Getter
 public class User implements UserDetails { //Classe UserDetails identifica uma classe que represente um user que vai ser autenticado
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String login;
 
