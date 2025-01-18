@@ -49,18 +49,42 @@ public class ClientService { //O service da entidade aplica as regras de negocio
 
     }
 
-    public Client updateClient(Client client){
-        return clientRepository.save(client);
+    public Optional<Client> updateClient(Long clientId, Client updatedClient) {
+        Optional<Client> existingClientOpt = clientRepository.findById(clientId);
+
+        if (existingClientOpt.isPresent()) {
+            Client existingClient = existingClientOpt.get();
+            existingClient.setNome(updatedClient.getNome());
+            existingClient.setCpf(updatedClient.getCpf());
+            existingClient.setEndereco(updatedClient.getEndereco());
+            existingClient.setTelefone(updatedClient.getTelefone());
+            existingClient.setNomeAnimal(updatedClient.getNomeAnimal());
+            existingClient.setTipoAnimal(updatedClient.getTipoAnimal());
+
+            clientRepository.save(existingClient);
+            return Optional.of(existingClient);
+        } else {
+            return Optional.empty();
+        }
     }
 
 
-    public Long StringToLongCpf(String cpfString) {
-        // Remover caracteres não numéricos e converter para Long
-        String cpfNumerico = cpfString.replaceAll("[^\\d]", "");
-        return Long.parseLong(cpfNumerico);
+    public Long stringToLong(String numericString) {
+        if (numericString == null || numericString.isEmpty()) {
+            throw new IllegalArgumentException("A string fornecida é nula ou vazia.");
+        }
+        try {
+            String numericOnly = numericString.replaceAll("[^\\d]", "");
+            return Long.parseLong(numericOnly);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("A string fornecida contém valores inválidos para conversão.", e);
+        }
     }
 
     public Long StringToLongTelefone(String telefoneString) {
+        if (telefoneString == null) {
+            throw new IllegalArgumentException("O telefone não pode ser nulo.");
+        }
         // Remover caracteres não numéricos e converter para Long
         String telefoneNumerico = telefoneString.replaceAll("[^\\d]", "");
         return Long.parseLong(telefoneNumerico);
