@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/client")
@@ -26,21 +27,13 @@ public class ClientController {
 
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
-        Client updateClient = clientService.findById(id);
+        // Chama o serviço, que já trata o Optional
+        Optional<Client> updatedClient = clientService.updateClient(id, client);
 
-        if (updateClient != null) {
-            updateClient.setNome(client.getNome());
-            updateClient.setCpf(client.getCpf());
-            updateClient.setEndereco(client.getEndereco());
-            updateClient.setTelefone(client.getTelefone());
-            updateClient.setNomeAnimal(client.getNomeAnimal());
-            updateClient.setTipoAnimal(client.getTipoAnimal());
-
-            Client updatedClient = clientService.updateClient(updateClient);
-            return ResponseEntity.ok(updatedClient);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        // Verifica se o cliente foi encontrado e atualizado
+        return updatedClient
+                .map(ResponseEntity::ok)  // Retorna 200 OK com o cliente atualizado
+                .orElseGet(() -> ResponseEntity.notFound().build());  // Retorna 404 Not Found se não encontrado
     }
 
     @GetMapping(value = "/id/{id}")
